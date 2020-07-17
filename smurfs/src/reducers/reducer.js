@@ -1,9 +1,10 @@
 import {
-    POST_SMURF_SUCCESS,
-    POST_SMURF_START
+    GET_SMURF_SUCCESS,
+    GET_SMURF_START,
+    POST_SMURF_SUCCESS
 } from '../actions/action';
 
-const initialState =  {
+export const initialState =  {
     isLoading: false,
     smurfs: [],
     error: ""
@@ -12,20 +13,26 @@ const initialState =  {
 export const reducer = ( state = initialState, action) => {
 
     switch(action.type) {
-        case POST_SMURF_START:
-            console.log('POST_START works')
+        case GET_SMURF_START:
+            console.log('GET_SMURF_START works')
             return{
                 ...state,
                 isLoading: true
             };
-        case POST_SMURF_SUCCESS:
-            console.log('POST_SUCCESS works')
-            console.log(action.payload[0])
+        case GET_SMURF_SUCCESS:
+            console.log('GET_SMURF works')
+            console.log(action.payload)
             return{
                 ...state,
                 isLoading: false,
-                smurfs: action.payload,
-                error: ""
+                smurfs:  action.payload,
+                error: "",  
+            };
+        case POST_SMURF_SUCCESS:
+            console.log('Smurf was submitted')
+            return{
+                ...state,
+                smurfs: action.payload
             };
         default:
             return state;
